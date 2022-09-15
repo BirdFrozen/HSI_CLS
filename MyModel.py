@@ -8,7 +8,7 @@ class HSI_CLS_model(nn.Module):
     def __init__(self, band_num, pretrain=False):
         super().__init__()
         self.f0 = nn.Sequential(
-            nn.ConvTranspose2d(band_num, 3, kernel_size=3, stride=1),
+            nn.Conv2d(band_num, 3, kernel_size=7, stride=1, padding=3),
             nn.BatchNorm2d(3),
             nn.ReLU(True),
         )
@@ -24,9 +24,20 @@ class HSI_CLS_model(nn.Module):
         return out
 
 
+# class HybridSN()
+#    def __init__(self, band_num, pretrain=False):
+#         self.f0 = nn.Sequential(
+#             nn.Conv2d(band_num, 3, kernel_size=7, stride=1, padding=3),
+#             nn.BatchNorm2d(3),
+#             nn.ReLU(True),
+#         )
+
+#     def forward(self, input):
+
+
 if __name__ == '__main__':
-    model = HSI_CLS_model(602)
-    input = torch.rand([3, 602, 200, 200])
+    model = HSI_CLS_model(603)
+    input = torch.rand([3, 603, 200, 200])
     print(type(input))
     output = model(input)
     print(output.size())
